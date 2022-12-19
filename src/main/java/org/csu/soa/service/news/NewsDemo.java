@@ -7,12 +7,12 @@ import org.csu.soa.service.api.ShowapiRequest;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Demo {
+public class NewsDemo {
 
     public static String appcode = "8f6fdadab3044adbb5f5f2d374dabbbf";
 
     public static void main(String[] args) throws Exception {
-        Demo.newsList();
+        NewsDemo.newsList("");
         System.out.println("分割线###########");
         //Demo.newsChannel();
     }
@@ -42,16 +42,16 @@ public class Demo {
     /**
      * 新闻列表查询
      */
-    public static void newsList() throws Exception {
+    public static JSONArray newsList(String keyword) throws Exception {
         ShowapiRequest req = new ShowapiRequest("https://ali-news.showapi.com/newsList", appcode);
         byte b[] = req.addTextPara("channelId", "")
                 .addTextPara("channelName", "")
-                .addTextPara("title", "") //TODO title
+                .addTextPara("title", keyword)
                 .addTextPara("page", "1")
                 .addTextPara("needContent", "0")
                 .addTextPara("needHtml", "0")
                 .addTextPara("needAllList", "0")
-                .addTextPara("maxResult", "20")
+                .addTextPara("maxResult", "5")
                 .addTextPara("id", "")
                 .getAsByte();
         //打印返回头
@@ -68,10 +68,12 @@ public class Demo {
         JSONObject json = JSONObject.parseObject(res);
         //System.out.println(json.getJSONObject("showapi_res_body"));
         JSONArray newsArray = json.getJSONObject("showapi_res_body").getJSONObject("pagebean").getJSONArray("contentlist");
+
         for (Object o : newsArray) {
             System.out.println(o);
-            System.out.println("----------");
+            System.out.println("--------------------------------------------------------------------------------");
         }
+        return newsArray;
     }
 }
 
