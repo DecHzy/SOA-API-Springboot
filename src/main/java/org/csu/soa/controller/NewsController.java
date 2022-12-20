@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/news")
 public class NewsController {
@@ -22,13 +19,30 @@ public class NewsController {
         } else {
             newsArray = NewsDemo.newsList(keyword);
         }
-//
-//        List<JSONObject> list = new ArrayList<>();
-//        for (int i = 0; i < newsArray.size(); i++) {
-//            JSONObject newsObject = newsArray.getJSONObject(i);
-//            list.add(newsObject);
-//        }
 
-        return newsArray.toString();
+        JSONArray returnNewsArray = new JSONArray();
+        for (int i = 0; i < newsArray.size(); i++) {
+            JSONObject jsonObject = newsArray.getJSONObject(i);
+            //System.out.println("当前新闻json数据~~~~~~~~~~~~~~~~");
+            //System.out.println(jsonObject);
+            //System.out.println("结束-当前新闻json数据~~~~~~~~~~~~~~~~");
+            if (jsonObject.get("desc") == null) {
+                //System.out.println("没有desc标签~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                //System.out.println(jsonObject);
+                //System.out.println("结束-没有desc标签~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                returnNewsArray.add(jsonObject);
+                continue;
+            } else if (jsonObject.get("link") == null) {
+                //System.out.println("没有link标签~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                //System.out.println(jsonObject);
+                //System.out.println("结束-没有link标签~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                returnNewsArray.add(jsonObject);
+                continue;
+            } else {
+                returnNewsArray.add(jsonObject);
+            }
+
+        }
+        return returnNewsArray.toString();
     }
 }

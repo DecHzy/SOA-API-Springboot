@@ -51,7 +51,7 @@ public class NewsDemo {
                 .addTextPara("needContent", "0")
                 .addTextPara("needHtml", "0")
                 .addTextPara("needAllList", "0")
-                .addTextPara("maxResult", "5")
+                .addTextPara("maxResult", "5")  //TODO 返回数量
                 .addTextPara("id", "")
                 .getAsByte();
         //打印返回头
