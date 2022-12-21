@@ -41,7 +41,7 @@ public class ChatGPT {
         //添加我们需要输入的内容
         json.set("prompt", str);
         json.set("temperature", 0.9); // 0~1 越接近0生成随机性越低
-        json.set("max_tokens", 100); // 返回长度-少用点
+        json.set("max_tokens", 500); // 返回长度-少用点
         json.set("top_p", 1);
         json.set("frequency_penalty", 0.0);
         json.set("presence_penalty", 0.6);
