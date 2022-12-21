@@ -48,7 +48,7 @@ public class ChatGPT {
 
         HttpResponse response = HttpRequest.post("https://api.openai.com/v1/completions")
                 .headerMap(headers, false)
-                .bearerAuth("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")
+                .bearerAuth("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")
                 .body(String.valueOf(json))
                 .timeout(5 * 60 * 1000)
                 .execute();
